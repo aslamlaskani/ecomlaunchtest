@@ -7,12 +7,14 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ── SECRET KEY AND ENVIRONMENT VARIABLES ──
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-aslivo-store-secret-key-change-in-production')
 
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['https://papaya-bublanina-cc5950.netlify.app/']
+ALLOWED_HOSTS = ['https://papaya-bublanina-cc5950.netlify.app/']  # Netlify frontend URL
 
+# ── INSTALLED APPS ──
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,6 +35,7 @@ INSTALLED_APPS = [
     'orders',
 ]
 
+# ── MIDDLEWARE ──
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -46,6 +49,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
+# ── TEMPLATES ──
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -64,17 +68,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-# ── DATABASE ──
+# ── DATABASE CONFIGURATION ──
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Use PostgreSQL in production
     }
 }
 
 # ── AUTH ──
 AUTH_USER_MODEL = 'accounts.User'
 
+# ── PASSWORD VALIDATORS ──
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -82,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# ── REST FRAMEWORK ──
+# ── REST FRAMEWORK CONFIG ──
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -108,10 +113,11 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# ── CORS ──
+# ── CORS CONFIGURATION ──
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    'http://localhost:3000',          # Local development
+    'http://127.0.0.1:3000',         # Local development
+    'https://papaya-bublanina-cc5950.netlify.app',  # Netlify frontend URL
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -121,7 +127,7 @@ TIME_ZONE = 'Asia/Karachi'
 USE_I18N = True
 USE_TZ = True
 
-# ── STATIC & MEDIA ──
+# ── STATIC & MEDIA FILES ──
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -130,14 +136,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ── Email (SMTP Gmail) ──
-EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_PORT          = 587
-EMAIL_USE_TLS       = True
-EMAIL_HOST_USER     = 'muhammadaslamlaskani01@gmail.com'
-EMAIL_HOST_PASSWORD = 'sgyn pcty ywoq pzhq'   # App Password
-DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
+# ── EMAIL SETTINGS ──
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'your-email@gmail.com')  # Use environment variable for email user
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'your-app-password')  # Use environment variable for email password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# ── Google OAuth ──
-GOOGLE_CLIENT_ID = 'xxxxxxxxxxxx.apps.googleusercontent.com'   # replace with real client ID
+# ── GOOGLE OAUTH CONFIG ──
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', 'xxxxxxxxxxxx.apps.googleusercontent.com')  # Use environment variable for Google client ID
