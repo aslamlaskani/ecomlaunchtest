@@ -9,10 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── SECRET KEY AND ENVIRONMENT VARIABLES ──
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-aslivo-store-secret-key-change-in-production')
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
-
-ALLOWED_HOSTS = ['https://papaya-bublanina-cc5950.netlify.app/']  # Netlify frontend URL
+ALLOWED_HOSTS = [
+    'https://papaya-bublanina-cc5950.netlify.app/',  # Your Netlify frontend URL
+    'ecomlaunchtest.onrender.com',  # Your Render backend URL
+]
 
 # ── INSTALLED APPS ──
 INSTALLED_APPS = [
