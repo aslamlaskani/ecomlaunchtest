@@ -1,0 +1,19 @@
+# Ignore the .env file (contains sensitive data like SECRET_KEY)
+.env
+
+# Ignore database files
+*.sqlite3
+/db.sqlite3
+
+# Ignore Django static files
+/staticfiles
+
+# Ignore media files
+/media
+
+# Ignore the virtual environment folder
+/venv
+
+# Ignore any IDE-specific files
+.idea/
+.vscode/
