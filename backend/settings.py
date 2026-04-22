@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-aslivo-store-secret-key-ch
 
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://papaya-bublanina-cc5950.netlify.app/']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
